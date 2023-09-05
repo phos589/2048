@@ -41,6 +41,7 @@ function moveTilesLeft() {
       
         }
       }
+      
     }
   }
 }
@@ -132,11 +133,42 @@ function updateGridUI() {
       const tile = document.createElement("div");
       tile.classList.add("tile");
       tile.textContent = tileValue !== 0 ? tileValue : "";
+
+      tile.style.backgroundColor = getTileBackgroundColor(tileValue);
+
+      tile.style.top = `${row * 100}px`;
+      tile.style.left = `${col * 100}px`;
+
       gameContainer.appendChild(tile);
+
+      tile.getBoundingClientRect();
+
+      tile.classList.add("animate");
     }
   }
 }
 
+
+function getTileBackgroundColor(value) {
+
+  const colorMap = {
+    0: "#CDC1B4",   
+    2: "#EEE4DA",
+    4: "#EDE0C8",
+    8: "#F2B179",
+    16: "#F59563",
+    32: "#F67C5F",
+    64: "#F65E3B",
+    128: "#EDCF72",
+    256: "#EDCC61",
+    512: "#EDC850",
+    1024: "#EDC53F",
+    2048: "#EDC22E",
+  };
+
+
+  return colorMap[value] || "#FF0000";
+}
 
 document.addEventListener("keydown", handleKeyDown);
 
